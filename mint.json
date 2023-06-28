@@ -1,0 +1,46 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Diversion",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#477BFF",
+    "light": "#6490FF",
+    "dark": "#477BFF"
+  },
+  "topbarCtaButton": {
+    "name": "Sign Up",
+    "url": "https://www.diversion.dev/#signupform"
+  },
+  "topbarLinks": [
+    {
+      "name": "Login",
+      "url": "https://app.diversion.dev/"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "API Reference",
+      "icon": "square-terminal",
+      "url": "api-reference"
+    },
+    {
+      "name": "Blog",
+      "icon": "Newspaper",
+      "url": "https://www.diversion.dev/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Analytics",
+      "pages": ["api-reference/analytics-ingest"]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/diversion_hq",
+    "linkedin": "https://www.linkedin.com/company/diversion-company-inc/"
+  }
+}

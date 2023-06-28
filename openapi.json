@@ -1,0 +1,3370 @@
+{
+  "components": {
+    "parameters": {
+      "AsyncFlowParam": {
+        "in": "query",
+        "name": "async_flow",
+        "schema": {
+          "enum": ["create", "complete"],
+          "example": "create",
+          "type": "string"
+        }
+      },
+      "BaseRefParam": {
+        "description": "A reference to a base unto which changes will be applied",
+        "in": "query",
+        "name": "base_id",
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "BaseVersionParam": {
+        "description": "A version identifier of the base tree (provided that base_id is a tree identifier)",
+        "in": "query",
+        "name": "base_ver",
+        "schema": { "example": 17, "minLength": 1, "type": "string" }
+      },
+      "BlobParam": {
+        "description": "An ID of a BLOB",
+        "in": "path",
+        "name": "blob_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "BranchParam": {
+        "description": "Branch ID. Branch _name_ can be used instead of the ID, but storing and using branch ID in API requests is preferred.",
+        "in": "path",
+        "name": "branch_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "CollaboratorParam": {
+        "description": "A user ID or email. User IDs are preferred, but an email can be used to invite a new collaborator who does not have an account or whose user ID is unknown.\n",
+        "in": "path",
+        "name": "collaborator_handle",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 255,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "CommitParam": {
+        "description": "A commit ID",
+        "in": "path",
+        "name": "commit_id",
+        "required": true,
+        "schema": {
+          "example": "dv.commit.350e1bc3-52dc-4659-9817-7ce8f3fdf628",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "ConflictIdParam": {
+        "description": "An identifier of a conflict retrieved in conflicts property of GET /repos/{repo_id}/merges/{merge_id}",
+        "in": "path",
+        "name": "conflict_id",
+        "required": true,
+        "schema": { "type": "string" }
+      },
+      "ConflictIndexIdParam": {
+        "description": "An identifier of a conflict index retrieved in conflicts property of GET /repos/{repo_id}/merges/{merge_id}",
+        "in": "path",
+        "name": "index_id",
+        "required": true,
+        "schema": { "type": "string" }
+      },
+      "DetailWorkspaceStatusItems": {
+        "description": "Should detail all the changed items in status response",
+        "in": "query",
+        "name": "detail_items",
+        "required": false,
+        "schema": { "default": true, "type": "boolean" }
+      },
+      "DirOffsetItemName": {
+        "description": "Offset item name in directory when iterating its entries (non-inclusive)",
+        "in": "query",
+        "name": "offset",
+        "required": false,
+        "schema": { "example": "file.ext", "type": "string" }
+      },
+      "FileEntriesLimit": {
+        "description": "Limit the number of entries returned from walk",
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": { "example": 17, "minimum": 1, "type": "integer" }
+      },
+      "FileWalkRecurseParam": {
+        "description": "Specifies if to recursively iterate file tree to next directory levels",
+        "in": "query",
+        "name": "recurse",
+        "required": false,
+        "schema": { "default": true, "type": "boolean" }
+      },
+      "IncludeDeletedItemsParam": {
+        "description": "Should the tree contain also deleted items or omit them from response",
+        "in": "query",
+        "name": "include_deleted",
+        "required": false,
+        "schema": { "default": false, "type": "boolean" }
+      },
+      "InviteIdParam": {
+        "description": "Invite ID, as returned by a previous call\n",
+        "in": "path",
+        "name": "invite_id",
+        "required": true,
+        "schema": { "example": 17, "type": "integer" }
+      },
+      "ItemIdParam": {
+        "description": "An ID of a an fs item (a BLOB or a TREE)",
+        "in": "path",
+        "name": "item_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "MergeParam": {
+        "description": "An ID of a merge attempt",
+        "in": "path",
+        "name": "merge_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "ModeParam": {
+        "description": "The file mode (as Unix mode)",
+        "in": "query",
+        "name": "mode",
+        "schema": { "enum": [16877, 33188, 33261, 40960], "type": "integer" }
+      },
+      "MtimeParam": {
+        "description": "The file's modification time in seconds since epoch",
+        "in": "query",
+        "name": "mtime",
+        "schema": { "type": "integer" }
+      },
+      "OtherRefParam": {
+        "description": "A reference to a source version from which changes will be taken",
+        "in": "query",
+        "name": "other_id",
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "OtherVersionParam": {
+        "description": "A version identifier of the other tree (provided that other_id is a tree identifier)",
+        "in": "query",
+        "name": "other_ver",
+        "schema": { "example": 120, "minLength": 1, "type": "string" }
+      },
+      "OwnerParam": {
+        "description": "The owner ID of the repository, either organization or user. Owner _name_ can be used instead of the ID, but usage of ID for permanent link storage and API requests is preferred.\n",
+        "in": "path",
+        "name": "owner_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "PageLimit": {
+        "description": "Limit the number or items returned from a listing api",
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 50,
+          "example": 17,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "PageQuery": {
+        "description": "A string query to filter against in a listing api",
+        "in": "query",
+        "name": "query",
+        "required": false,
+        "schema": {
+          "example": "foo",
+          "maxLength": 64,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "PageSkip": {
+        "description": "Skip a number of items returned from a listing api",
+        "in": "query",
+        "name": "skip",
+        "required": false,
+        "schema": { "example": 17, "minimum": 1, "type": "integer" }
+      },
+      "PathParam": {
+        "description": "A path to a file inside the repository.",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "schema": {
+          "example": "/path/to/file",
+          "format": "path",
+          "type": "string"
+        }
+      },
+      "PathPrefixParam": {
+        "description": "A path prefix in the file tree to walk under",
+        "in": "query",
+        "name": "path_prefix",
+        "required": false,
+        "schema": {
+          "example": "path/to/file",
+          "format": "path",
+          "type": "string"
+        }
+      },
+      "RefParam": {
+        "description": "An ID of a workspace, branch or commit.",
+        "in": "path",
+        "name": "ref_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "RepoParam": {
+        "description": "The repo ID of the repository. Repo _name_ can be used instead of the ID, but usage of ID for permanent linking and API requests is preferred.",
+        "in": "path",
+        "name": "repo_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "RevertRefParam": {
+        "description": "A reference to a source version to revert, currently only commit ID is supported",
+        "in": "query",
+        "name": "revert_ref_id",
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "SHA1Param": {
+        "description": "A sha1 hexdigest",
+        "example": "7d76d48d64d7ac5411d714a4bb83f37e3e5b8df6",
+        "in": "query",
+        "name": "sha1",
+        "required": false,
+        "schema": { "type": "string" }
+      },
+      "ShelfIdParam": {
+        "description": "Shelf identifier",
+        "in": "path",
+        "name": "shelf_id",
+        "required": true,
+        "schema": {
+          "example": "dv.shelf.12a37e91-bfc4-4e03-a330-13b5b84ab7cb",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "TagParam": {
+        "description": "Tag identifier",
+        "in": "path",
+        "name": "tag_id",
+        "required": true,
+        "schema": {
+          "example": "dv.tag.12a37e91-bfc4-4e03-a330-13b5b84ab7cb",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "TransactionIDParam": {
+        "in": "header",
+        "name": "X-DV-Transaction-ID",
+        "schema": { "type": "string" }
+      },
+      "TreeIdParam": {
+        "description": "An ID of a TREE",
+        "in": "path",
+        "name": "tree_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "TreeIdQueryParam": {
+        "description": "An id string from the previous result, used for validation",
+        "in": "query",
+        "name": "tree_id",
+        "required": false,
+        "schema": {
+          "example": "dv.tree.455c3352-793f-41b5-a506-b61c803b5719",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "TreeItemNameQueryParam": {
+        "description": "A query string to test against item name, only matching items will be collected",
+        "in": "query",
+        "name": "item_name_query",
+        "required": false,
+        "schema": {
+          "example": "abcd",
+          "maxLength": 32,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "TreeVersionParam": {
+        "description": "A version of a TREE",
+        "in": "path",
+        "name": "tree_version",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "TreeVersionQueryParam": {
+        "description": "A version string from the previous result, used for validation",
+        "in": "query",
+        "name": "tree_version",
+        "required": false,
+        "schema": { "example": 167, "minLength": 1, "type": "string" }
+      },
+      "UserIdParam": {
+        "description": "A user's ID",
+        "in": "path",
+        "name": "user_id",
+        "required": true,
+        "schema": {
+          "example": "Google_1192874509253",
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "VersionPathParam": {
+        "description": "A version string",
+        "in": "path",
+        "name": "version",
+        "required": true,
+        "schema": { "example": 167, "minLength": 1, "type": "string" }
+      },
+      "VersionQueryParam": {
+        "description": "A version string",
+        "in": "query",
+        "name": "version",
+        "required": true,
+        "schema": { "example": 167, "minLength": 1, "type": "string" }
+      },
+      "WorkspaceParam": {
+        "description": "The repo ID of the workspace.",
+        "in": "path",
+        "name": "workspace_id",
+        "required": true,
+        "schema": {
+          "example": "example_id",
+          "maxLength": 128,
+          "minLength": 3,
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "The request does not meet the required conditions"
+      },
+      "BranchList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Branch" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Branch"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      },
+      "CollaboratorsList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "collaborators": {
+                  "items": { "$ref": "#/components/schemas/Collaborator" },
+                  "type": "array"
+                },
+                "invites": {
+                  "items": {
+                    "$ref": "#/components/schemas/CollaborationInvite"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "description": "A list of collaborators and pending invites"
+      },
+      "Commit": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Commit" }
+          }
+        },
+        "description": "An object describing a commit"
+      },
+      "CommitList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Commit" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Commit"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      },
+      "CommitsById": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "additionalProperties": { "$ref": "#/components/schemas/Commit" },
+              "type": "object"
+            }
+          }
+        },
+        "description": "An object describing a mapping of a commit by its ID"
+      },
+      "ComparisonList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/ComparisonItem" },
+                  "type": "array"
+                },
+                "object": { "enum": ["ComparisonItem"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "A list of tree comparison objects"
+      },
+      "ConflictSide": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ConflictIndex" }
+          }
+        },
+        "description": "An object describing a file version of one side of a merge conflict"
+      },
+      "Created": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/NewResourceId" }
+          }
+        },
+        "description": "Resource created"
+      },
+      "CustomRedirect": {
+        "description": "Redirect to file contents",
+        "headers": {
+          "Expires": {
+            "description": "HTTP date when the URL expires",
+            "example": "Wed, 21 Oct 2015 07:28:00 GMT",
+            "schema": { "type": "string" }
+          },
+          "Last-Modified": {
+            "description": "HTTP date when the file was last modified",
+            "example": "Wed, 21 Oct 2015 07:28:00 GMT",
+            "schema": { "type": "string" }
+          },
+          "Location": {
+            "description": "URL to the location of the file",
+            "example": "https://s3.amazonaws.com/b4bcacbb847681ac9fc372615a2206a4?X-Amz-Algorithm=AWS4-HMAC-SHA256",
+            "schema": { "type": "string" }
+          }
+        }
+      },
+      "DetailedMerge": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/DetailedMerge" }
+          }
+        },
+        "description": "An object describing the merge."
+      },
+      "Error": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "An error occurred"
+      },
+      "FailedDueToPendingChanges": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "Operation failed due to pending changes on the resource"
+      },
+      "FileEntryList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "has_more_items": {
+                  "description": "True if if not all relevant items were returned and there are additional pages to iterate",
+                  "type": "boolean"
+                },
+                "items": {
+                  "items": { "$ref": "#/components/schemas/FileEntry" },
+                  "type": "array"
+                },
+                "object": { "enum": ["FileEntry"], "type": "string" },
+                "tree_id_ver": { "$ref": "#/components/schemas/IdVersion" }
+              },
+              "required": ["object", "items", "tree_id_ver", "has_more_items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      },
+      "IdVersion": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/IdVersion" }
+          }
+        },
+        "description": "ID and version of an object."
+      },
+      "ItemHistoryResponse": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "entries": {
+                  "items": { "$ref": "#/components/schemas/ItemHistoryEntry" },
+                  "type": "array"
+                }
+              },
+              "required": ["entries"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "List of changes in the history of a versioned item"
+      },
+      "MergeList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Merge" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Merge"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      },
+      "NotFound": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "The specified resource was not found"
+      },
+      "OKEmpty": { "description": "Request completed successfully" },
+      "PreconditionFailed": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "The specified resource is no longer up to date"
+      },
+      "RepoList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Repo" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Repo"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      },
+      "ShelfList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Shelf" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Shelf"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "A list of shelf objects"
+      },
+      "TagList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Tag" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Tag"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "A list of tag objects"
+      },
+      "Tree": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "tree": { "$ref": "#/components/schemas/RfsTree" }
+              },
+              "required": ["tree"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "An object describing an RFS tree"
+      },
+      "Trees": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "trees": {
+                  "items": { "$ref": "#/components/schemas/RfsTree" },
+                  "type": "array"
+                }
+              },
+              "required": ["trees"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "An object describing a path of RFS trees"
+      },
+      "Unauthorized": {
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "description": "Unauthorized"
+      },
+      "WorkspaceList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "items": {
+                  "items": { "$ref": "#/components/schemas/Workspace" },
+                  "type": "array"
+                },
+                "object": { "enum": ["Workspace"], "type": "string" }
+              },
+              "required": ["object", "items"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Success"
+      }
+    },
+    "schemas": {
+      "AccessMode": {
+        "enum": ["READ", "WRITE", "ADMIN", "OWNER"],
+        "type": "string"
+      },
+      "AnalyticsEvent": {
+        "description": "An analytics event",
+        "properties": {
+          "event": { "type": "string" },
+          "properties": { "type": "object" }
+        },
+        "required": ["event", "properties"],
+        "type": "object"
+      },
+      "AnalyticsEvents": {
+        "description": "A list of analytics events",
+        "properties": {
+          "events": {
+            "items": { "$ref": "#/components/schemas/AnalyticsEvent" },
+            "type": "array"
+          }
+        },
+        "required": ["events"],
+        "type": "object"
+      },
+      "ApplyShelf": {
+        "properties": {
+          "delete_shelf": {
+            "default": false,
+            "description": "Should shelf be deleted after applying it",
+            "type": "boolean"
+          },
+          "workspace_id": {
+            "description": "Workspace ID on which to apply the shelved changes",
+            "type": "string"
+          }
+        },
+        "required": ["workspace_id"],
+        "type": "object"
+      },
+      "AsyncResponse": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CustomRedirectResponse" },
+          {
+            "properties": {
+              "poll_interval_sec": { "type": "integer" },
+              "ref_id": { "type": "string" },
+              "status": { "type": "integer" }
+            },
+            "type": "object"
+          }
+        ],
+        "description": "Response with the location of the result of an asynchronous processing of the request",
+        "required": ["status", "ref_id"]
+      },
+      "BlobUploadUrl": {
+        "allOf": [
+          {
+            "properties": {
+              "blob_id": {
+                "example": "dv.blob.40630485-8f8f-4c34-b102-0072ca53ffba",
+                "type": "string"
+              },
+              "blob_version": { "example": "17", "type": "string" }
+            },
+            "required": ["blob_id", "blob_version"],
+            "type": "object"
+          },
+          { "$ref": "#/components/schemas/PresignedUploadUrl" }
+        ]
+      },
+      "Branch": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewBranch" },
+          {
+            "properties": {
+              "author": { "$ref": "#/components/schemas/User" },
+              "branch_id": {
+                "description": "Branch identifier in Diversion",
+                "type": "string"
+              },
+              "time": { "description": "Creation time", "type": "number" }
+            },
+            "required": ["branch_id", "author", "time"],
+            "type": "object"
+          }
+        ]
+      },
+      "CollaborationInvite": {
+        "properties": {
+          "access_mode": { "$ref": "#/components/schemas/AccessMode" },
+          "created": { "format": "date-time", "type": "string" },
+          "expires": { "format": "date-time", "type": "string" },
+          "invite_id": { "example": 17, "type": "integer" },
+          "invited_email": { "format": "email", "type": "string" },
+          "inviting_user_id": { "type": "string" }
+        },
+        "required": [
+          "invite_id",
+          "inviting_user_id",
+          "invited_email",
+          "access_mode",
+          "created",
+          "expires"
+        ],
+        "type": "object"
+      },
+      "CollaborationRequest": {
+        "properties": { "mode": { "$ref": "#/components/schemas/AccessMode" } },
+        "required": ["mode"],
+        "type": "object"
+      },
+      "Collaborator": {
+        "properties": {
+          "access_mode": { "$ref": "#/components/schemas/AccessMode" },
+          "collaboration_id": { "type": "string" },
+          "email": { "format": "email", "type": "string" },
+          "name": { "type": "string" },
+          "user_id": { "type": "string" }
+        },
+        "required": ["collaboration_id", "user_id", "access_mode"],
+        "type": "object"
+      },
+      "Commit": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CommitId" },
+          {
+            "properties": {
+              "author": {
+                "$ref": "#/components/schemas/User",
+                "description": "Details of the user who added the commit"
+              },
+              "branch_id": {
+                "description": "The branch on which this commit was created",
+                "type": "string"
+              },
+              "commit_message": { "type": "string" },
+              "created_ts": {
+                "description": "Seconds since epoch UTC",
+                "type": "integer"
+              },
+              "parents": {
+                "description": "List of parent commits of this commit",
+                "items": { "type": "string" },
+                "type": "array"
+              },
+              "tree": { "$ref": "#/components/schemas/IdVersion" }
+            },
+            "required": [
+              "tree",
+              "created_ts",
+              "branch_id",
+              "author",
+              "parents"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "CommitId": {
+        "properties": {
+          "commit_id": {
+            "example": "example_id",
+            "maxLength": 128,
+            "minLength": 3,
+            "type": "string"
+          }
+        },
+        "required": ["commit_id"],
+        "type": "object"
+      },
+      "CommitMessage": {
+        "properties": { "commit_message": { "type": "string" } },
+        "type": "object"
+      },
+      "CommitRequest": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CommitMessage" },
+          {
+            "properties": {
+              "include_paths": {
+                "description": "Inclusion list of modified paths to commit. Other modifications will not be committed. If no list is provided, all modifications will be included.",
+                "items": { "type": "string" },
+                "type": "array"
+              },
+              "workspace_id": { "type": "string" }
+            },
+            "required": ["workspace_id", "commit_message"],
+            "type": "object"
+          }
+        ]
+      },
+      "ComparisonItem": {
+        "description": "Describes a comparison result at a single path. At least one of base/other items must be present.",
+        "properties": {
+          "base_item": { "$ref": "#/components/schemas/IdVersion" },
+          "journal_entry": { "$ref": "#/components/schemas/JournalEntry" },
+          "other_item": { "$ref": "#/components/schemas/IdVersion" },
+          "other_path": {
+            "description": "Path of other item if other exists, might be different than base item in case of move",
+            "type": "string"
+          },
+          "path": {
+            "description": "Path of base item if base exists",
+            "type": "string"
+          }
+        },
+        "required": ["journal_entry"],
+        "type": "object"
+      },
+      "Conflict": {
+        "properties": {
+          "ancestor": {
+            "$ref": "#/components/schemas/IdVersion",
+            "description": "Descriptor for ancestor file, if exists"
+          },
+          "base": { "$ref": "#/components/schemas/ConflictIndex" },
+          "conflict_id": { "type": "string" },
+          "is_resolved": { "type": "boolean" },
+          "other": { "$ref": "#/components/schemas/ConflictIndex" },
+          "result": { "$ref": "#/components/schemas/ConflictIndex" }
+        },
+        "required": ["conflict_id", "is_resolved", "base", "other", "result"],
+        "type": "object"
+      },
+      "ConflictIndex": {
+        "description": "A index in a conflict, could be representing either \"base\", \"other\" or \"result\". If the index does not represent \"result\", then all properties besides \"prev_path\" can be considered 'required'.\n",
+        "properties": {
+          "conflict_index_id": { "type": "string" },
+          "file_id": { "type": "string" },
+          "file_mode": { "type": "integer" },
+          "file_version": { "type": "string" },
+          "object_type": { "type": "integer" },
+          "path": { "type": "string" },
+          "prev_path": { "type": "string" },
+          "type": { "enum": ["modified", "added", "deleted"], "type": "string" }
+        },
+        "required": ["conflict_index_id", "file_id"],
+        "type": "object"
+      },
+      "CreateShelf": {
+        "properties": {
+          "name": {
+            "description": "Display name of the shelf",
+            "type": "string"
+          },
+          "reset_workspace": {
+            "default": true,
+            "description": "Should reset workspace changes after creating the shelf",
+            "type": "boolean"
+          },
+          "workspace_id": {
+            "description": "Workspace ID from which to shelve changes",
+            "type": "string"
+          }
+        },
+        "required": ["name", "workspace_id"],
+        "type": "object"
+      },
+      "CreateTag": {
+        "properties": {
+          "commit_id": {
+            "description": "Commit ID that the tag references",
+            "type": "string"
+          },
+          "description": {
+            "description": "More information about the tag",
+            "type": "string"
+          },
+          "name": { "description": "Display name of the tag", "type": "string" }
+        },
+        "required": ["name", "commit_id"],
+        "type": "object"
+      },
+      "CustomRedirectResponse": {
+        "description": "A redirect that needs to be followed in a different HTTP context than the original request.",
+        "properties": {
+          "result_url": { "type": "string" },
+          "timeout_sec": { "type": "integer" }
+        },
+        "type": "object"
+      },
+      "DetailedMerge": {
+        "allOf": [
+          { "$ref": "#/components/schemas/Merge" },
+          {
+            "properties": {
+              "conflicts": {
+                "items": { "$ref": "#/components/schemas/Conflict" },
+                "type": "array"
+              }
+            },
+            "required": ["conflicts"],
+            "type": "object"
+          }
+        ]
+      },
+      "Error": {
+        "properties": {
+          "detail": {
+            "example": "User not authorized to perform the requested action on the resource",
+            "type": "string"
+          },
+          "status": { "example": 403, "type": "string" },
+          "title": { "type": "string" },
+          "type": { "type": "string" }
+        },
+        "required": ["status", "detail"],
+        "type": "object"
+      },
+      "FileEntry": {
+        "allOf": [
+          { "$ref": "#/components/schemas/FileMetadata" },
+          { "$ref": "#/components/schemas/FileHistoryEntry" },
+          {
+            "properties": {
+              "mode": {
+                "description": "The file mode (as Unix mode)",
+                "enum": [16877, 33188, 33261, 40960],
+                "type": "integer"
+              },
+              "mtime": {
+                "description": "The file's modification time in seconds since epoch",
+                "type": "integer"
+              }
+            },
+            "required": ["mode", "mtime"],
+            "type": "object"
+          }
+        ]
+      },
+      "FileHistoryEntry": {
+        "properties": {
+          "id_ver": { "$ref": "#/components/schemas/IdVersion" },
+          "path": { "example": "hello.cc", "type": "string" },
+          "prev_path": { "type": "string" },
+          "status": {
+            "description": "One of: 1 - INTACT, 2 - ADDED, 3 - MODIFIED, 4 - DELETED",
+            "enum": [1, 2, 3, 4],
+            "type": "integer"
+          },
+          "type": {
+            "description": "One of: 1 - Directory, 2 - File",
+            "enum": [1, 2, 4],
+            "type": "integer"
+          }
+        },
+        "required": ["id_ver", "type", "path", "status"],
+        "type": "object"
+      },
+      "FileMetadata": {
+        "properties": {
+          "size": { "description": "Item size in bytes", "type": "integer" },
+          "type": {
+            "description": "One of: 1 - Directory, 2 - File",
+            "enum": [1, 2, 4],
+            "type": "integer"
+          }
+        },
+        "required": ["type", "size"],
+        "type": "object"
+      },
+      "IdVersion": {
+        "description": "A unique identifier made of object id and version",
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" }
+        },
+        "required": ["id", "version"],
+        "type": "object"
+      },
+      "ItemHistoryEntry": {
+        "description": "A change in the history of a versioned item",
+        "properties": {
+          "commit": { "$ref": "#/components/schemas/Commit" },
+          "item": { "$ref": "#/components/schemas/FileHistoryEntry" }
+        },
+        "required": ["item", "commit"],
+        "type": "object"
+      },
+      "JournalEntry": {
+        "properties": {
+          "blob_ver": { "type": "string" },
+          "change_type": {
+            "description": "One of: 1 - ADDED, 2 - MODIFIED, 3 - DELETED, 4 - RENAMED",
+            "enum": [1, 2, 3, 4],
+            "type": "integer"
+          },
+          "ctime": { "format": "datetime", "type": "string" },
+          "hash": { "type": "string" },
+          "mtime": { "format": "datetime", "type": "string" },
+          "name": { "type": "string" },
+          "obj_id": {
+            "example": "dv.blob.60f07653-f561-4043-b1ff-f1e4de3bcf49",
+            "type": "string"
+          },
+          "obj_type": {
+            "description": "One of: 1 - Directory, 2 - File",
+            "enum": [1, 2, 4],
+            "type": "integer"
+          },
+          "ordinal_id": {
+            "description": "Server side ordinal id of this entry, if fetched in the context of workspace updates",
+            "type": "integer"
+          },
+          "permissions": { "type": "integer" },
+          "size": { "type": "integer" },
+          "tree_id": {
+            "description": "Tree ID containing this item",
+            "type": "string"
+          },
+          "ws_revision": {
+            "description": "Revision of the workspace assigned to this entry",
+            "type": "integer"
+          }
+        },
+        "required": ["obj_id", "obj_type", "ws_rev", "change_type", "hash"],
+        "type": "object"
+      },
+      "Merge": {
+        "description": "Describes a merge in progress with conflicts",
+        "properties": {
+          "ancestor_commit": { "type": "string" },
+          "base_commit": { "type": "string" },
+          "base_ref": { "type": "string" },
+          "id": { "type": "string" },
+          "is_open": { "type": "boolean" },
+          "other_branch": { "type": "string" },
+          "other_commit": { "type": "string" },
+          "repo_id": { "type": "string" },
+          "result_commit": { "type": "string" },
+          "user_id": { "type": "string" }
+        },
+        "required": [
+          "id",
+          "repo_id",
+          "user_id",
+          "base_ref",
+          "base_commit",
+          "other_commit",
+          "ancestor_commit",
+          "result_commit",
+          "is_open"
+        ],
+        "type": "object"
+      },
+      "MergeId": {
+        "properties": {
+          "merge_id": {
+            "example": "example_id",
+            "maxLength": 128,
+            "minLength": 3,
+            "type": "string"
+          }
+        },
+        "required": ["merge_id"],
+        "type": "object"
+      },
+      "ModifyTag": {
+        "properties": {
+          "description": {
+            "description": "More information about the tag",
+            "type": "string"
+          },
+          "name": { "description": "Display name of the tag", "type": "string" }
+        },
+        "type": "object"
+      },
+      "NewBranch": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CommitId" },
+          {
+            "properties": {
+              "branch_name": {
+                "example": "new-branch-name",
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": ["branch_name"],
+            "type": "object"
+          }
+        ]
+      },
+      "NewRepo": {
+        "properties": {
+          "description": { "type": "string" },
+          "homepage": { "format": "uri", "type": "string" },
+          "repo_name": {
+            "example": "repo-name",
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": ["repo_name"],
+        "type": "object"
+      },
+      "NewResourceId": {
+        "properties": {
+          "id": {
+            "description": "The id of the newly created resource",
+            "example": "example_id",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "NewWorkspace": {
+        "anyOf": [
+          { "$ref": "#/components/schemas/CommitId" },
+          {
+            "properties": {
+              "branch_id": { "type": "string" },
+              "name": { "type": "string" }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "OrgDefinition": {
+        "properties": {
+          "org_name": { "example": "example-name", "type": "string" }
+        },
+        "required": ["org_name"],
+        "type": "object"
+      },
+      "PresignedUploadUrl": {
+        "properties": {
+          "fields": {
+            "properties": {
+              "key": {
+                "example": "repo_id/dv.blob.40630485-8f8f-4c34-b102-0072ca53ffba",
+                "type": "string"
+              },
+              "policy": {
+                "example": "eyJleHBpcmF0aW9uIjogIjIwMjItMTEtMzBUMTA6NTI6NThaIiwgImNvbmRpdGlvbnMiOiBbeyJ4LWFtei1jaGVja3N1bS1hbGdvcml0aG0iOiAiU0hBMSJ9LCB7ImJ1Y2tldCI6ICJkdi1ibG9icyJ9LCB7ImtleSI6ICJyZXBvX2lkL2R2LmJsb2IuNDA2MzA0ODUtOGY4Zi00YzM0LWIxMDItMDA3MmNhNTNmZmJhIn0sIHsieC1hbXotYWx",
+                "type": "string"
+              },
+              "x-amz-algorithm": {
+                "example": "AWS4-HMAC-SHA256",
+                "type": "string"
+              },
+              "x-amz-checksum-algorithm": {
+                "example": "SHA1",
+                "type": "string"
+              },
+              "x-amz-credential": {
+                "example": "AKAKI6PFK43K4U6ASQ3V2/11111111/eu-central-1/s3/aws4_request",
+                "type": "string"
+              },
+              "x-amz-date": { "example": "20221130T095258Z", "type": "string" },
+              "x-amz-signature": {
+                "example": "bc50d66096b27eb2bc4855ef59748f8dfba896529b11480daaa594097fc46713",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "url": {
+            "example": "https://dv-blobs.s3.amazonaws.com/",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Repo": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewRepo" },
+          {
+            "properties": {
+              "created_timestamp": {
+                "description": "Seconds since epoch UTC",
+                "type": "integer"
+              },
+              "default_branch_id": { "type": "string" },
+              "default_branch_name": { "type": "string" },
+              "owner_user_id": { "type": "string" },
+              "repo_id": { "example": "example_id", "type": "string" },
+              "size_bytes": { "format": "float", "type": "number" },
+              "sync_git_repo_url": {
+                "description": "Optional URL of the git repository being synced with the repo",
+                "type": "string"
+              }
+            },
+            "required": [
+              "repo_name",
+              "repo_id",
+              "default_branch_id",
+              "size_bytes",
+              "owner_user_id",
+              "created_timestamp"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "ResetStatus": {
+        "description": "Response of a reset command.",
+        "properties": {
+          "fail": {
+            "description": "Paths that were not found.",
+            "items": { "type": "string" },
+            "type": "array"
+          },
+          "success": {
+            "description": "Paths that were successfully reset.",
+            "items": { "type": "string" },
+            "type": "array"
+          }
+        },
+        "required": ["success", "fail"],
+        "type": "object"
+      },
+      "RfsTree": {
+        "description": "Describes a tree in RFS",
+        "properties": {
+          "commit_id": { "type": "string" },
+          "id_ver": { "$ref": "#/components/schemas/IdVersion" },
+          "items": {
+            "items": { "$ref": "#/components/schemas/RfsTreeItem" },
+            "type": "array"
+          }
+        },
+        "required": ["id_ver", "commit_id", "items"],
+        "type": "object"
+      },
+      "RfsTreeItem": {
+        "description": "Describes a tree item in RFS",
+        "properties": {
+          "ctime": { "type": "integer" },
+          "hash": { "type": "string" },
+          "id_ver": { "$ref": "#/components/schemas/IdVersion" },
+          "mode": { "type": "integer" },
+          "mtime": { "type": "integer" },
+          "name": { "type": "string" },
+          "prev_path": { "type": "string" },
+          "size": { "type": "integer" },
+          "status": { "type": "integer" },
+          "type": { "type": "integer" }
+        },
+        "required": [
+          "id_ver",
+          "mode",
+          "type",
+          "hash",
+          "status",
+          "mtime",
+          "ctime",
+          "size"
+        ],
+        "type": "object"
+      },
+      "Shelf": {
+        "properties": {
+          "branch_id": {
+            "description": "Optional branch ID from which the changes were shelved",
+            "type": "string"
+          },
+          "created_timestamp": {
+            "description": "Seconds since epoch UTC",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Tag identifier in Diversion",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name of the shelf",
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "created_timestamp"],
+        "type": "object"
+      },
+      "Tag": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CreateTag" },
+          {
+            "properties": {
+              "author": { "$ref": "#/components/schemas/User" },
+              "id": {
+                "description": "Tag identifier in Diversion",
+                "type": "string"
+              },
+              "time": { "description": "Creation time", "type": "number" }
+            },
+            "required": ["id", "author", "time"],
+            "type": "object"
+          }
+        ]
+      },
+      "User": {
+        "description": "User details",
+        "properties": {
+          "email": { "format": "email", "type": "string" },
+          "full_name": { "type": "string" },
+          "id": { "type": "string" },
+          "image": { "description": "URL of the user image", "type": "string" },
+          "name": { "type": "string" }
+        },
+        "required": ["id", "name", "email"],
+        "type": "object"
+      },
+      "Workspace": {
+        "properties": {
+          "branch_id": { "type": "string" },
+          "name": { "maxLength": 128, "type": "string" },
+          "repo_id": { "type": "string" },
+          "revision": { "type": "integer" },
+          "source_commit": { "type": "string" },
+          "tree_commit_id": {
+            "description": "The commit ID the workspace tree is based on",
+            "type": "string"
+          },
+          "tree_id_ver": { "$ref": "#/components/schemas/IdVersion" },
+          "workspace_id": { "type": "string" }
+        },
+        "required": [
+          "workspace_id",
+          "tree_id_ver",
+          "tree_commit_id",
+          "repo_id",
+          "revision"
+        ],
+        "type": "object"
+      },
+      "WorkspaceModify": {
+        "description": "Properties to modify in an existing workspace",
+        "properties": {
+          "name": {
+            "description": "An optional name to set for the workspace",
+            "minLength": 1,
+            "type": "string"
+          },
+          "ref_id": {
+            "description": "An optional branch or commit ID to point the workspace onto",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "WorkspacePreferences": {
+        "description": "Preferences associated with a user for a workspace",
+        "properties": {
+          "sync_paths_rules": {
+            "description": "List of rules setting which paths to sync, an empty list means sync all",
+            "items": { "type": "string" },
+            "type": "array"
+          }
+        },
+        "required": ["sync_paths_rules"],
+        "type": "object"
+      },
+      "WorkspaceStatus": {
+        "description": "The status of the workspace, meaning its bill of changes. It will contain the total number of changed items and specifically changed files. If paths details were requested, it will also contain an object having 'new', 'modified', 'deleted' arrays of file entries, sorted lexicographically.\n",
+        "properties": {
+          "changed_files_count": {
+            "description": "Number of changed files",
+            "type": "number"
+          },
+          "changed_items_count": {
+            "description": "Number of changed items of all types",
+            "type": "number"
+          },
+          "conflicts": { "items": { "type": "string" }, "type": "array" },
+          "incomplete_result": {
+            "description": "The result list was trimmed and the counts are a lower bound only",
+            "type": "boolean"
+          },
+          "items": {
+            "description": "Drill down into modified items by change type",
+            "properties": {
+              "deleted": {
+                "items": { "$ref": "#/components/schemas/FileEntry" },
+                "type": "array"
+              },
+              "modified": {
+                "items": { "$ref": "#/components/schemas/FileEntry" },
+                "type": "array"
+              },
+              "new": {
+                "items": { "$ref": "#/components/schemas/FileEntry" },
+                "type": "array"
+              }
+            },
+            "required": ["new", "modified", "deleted"],
+            "type": "object"
+          }
+        },
+        "required": ["changed_items_count", "changed_files_count"],
+        "type": "object"
+      },
+      "WorkspaceUpdates": {
+        "description": "A list of modification operations done on the workspace.",
+        "properties": {
+          "branch_id": {
+            "description": "Which branch the workspace is checked out on, or none if detached",
+            "type": "string"
+          },
+          "commit_id": {
+            "description": "Latest commit the workspace is checkout out on",
+            "type": "string"
+          },
+          "curr_revision": { "type": "integer" },
+          "incomplete_response": {
+            "description": "More results are available, call the endpoint again with the latest revision from this response",
+            "type": "boolean"
+          },
+          "journal": {
+            "items": { "$ref": "#/components/schemas/JournalEntry" },
+            "type": "array"
+          },
+          "root_id_ver": { "$ref": "#/components/schemas/IdVersion" }
+        },
+        "required": ["journal", "curr_revision", "root_id_ver", "commit_id"],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "This API uses OAuth 2 with the implicit grant flow",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://auth.diversion.dev/oauth2/authorize",
+            "scopes": {
+              "coreapi/admin": "Organizational operations like adding a repo or changing repo properties",
+              "coreapi/read": "Operations with no possible side-effects",
+              "coreapi/write": "Modifying operations"
+            }
+          }
+        },
+        "type": "oauth2",
+        "x-tokenInfoFunc": "src.token_info.token_auth"
+      }
+    }
+  },
+  "info": {
+    "description": "Definition of the Core API used to access low-level functionality of Diversion",
+    "title": "Diversion Core API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/analytics/ingest": {
+      "post": {
+        "operationId": "src.handlers.analytics.ingest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AnalyticsEvents" }
+            }
+          }
+        },
+        "responses": { "204": { "$ref": "#/components/responses/OKEmpty" } },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "summary": "Ingest analytics events",
+        "tags": ["Analytics"]
+      }
+    },
+    "/auth/complete": {
+      "get": {
+        "description": "Callback URL for sign-ins",
+        "operationId": "src.handlers.auth.complete",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "required": false,
+            "schema": { "maxLength": 128, "minLength": 1, "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "required": true,
+            "schema": { "maxLength": 256, "minLength": 43, "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "error_description",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": { "text/html": { "schema": { "type": "string" } } },
+            "description": "Sign-in flow completed"
+          }
+        },
+        "tags": ["Authentication"]
+      }
+    },
+    "/auth/fetch_code": {
+      "get": {
+        "description": "Retrieve the code grant in exchange for the correct code challenge and verifier",
+        "operationId": "src.handlers.auth.fetch_code",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code_challenge",
+            "required": true,
+            "schema": { "maxLength": 128, "minLength": 43, "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "code_verifier",
+            "required": true,
+            "schema": { "maxLength": 128, "minLength": 43, "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": { "code": { "type": "string" } },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Code challenge and verifier are correct, code grant returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "tags": ["Authentication"]
+      }
+    },
+    "/auth/poll": {
+      "get": {
+        "description": "Polling endpoint for the CLI to wait for the user to complete the sign-in flow",
+        "operationId": "src.handlers.auth.poll",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code_challenge",
+            "required": true,
+            "schema": { "maxLength": 128, "minLength": 43, "type": "string" }
+          }
+        ],
+        "responses": {
+          "202": { "description": "Not yet completed" },
+          "302": {
+            "description": "Sign-in completed, go to redirected address to fetch the code"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            },
+            "description": "Provided `code_challenge` not found. The user might have not yet started the sign-in flow"
+          }
+        },
+        "tags": ["Authentication"]
+      }
+    },
+    "/auth/test": {
+      "get": {
+        "description": "Validate the given auth token, test write access to specified repo",
+        "operationId": "src.handlers.auth.test_token",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "repo_id",
+            "required": false,
+            "schema": { "maxLength": 128, "minLength": 9, "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Test token validity, repo write access",
+        "tags": ["Authentication"]
+      }
+    },
+    "/debug/isalive": {
+      "get": {
+        "operationId": "src.handlers.debug.is_alive",
+        "responses": { "200": { "$ref": "#/components/responses/OKEmpty" } },
+        "summary": "Check server is alive",
+        "tags": ["Debug"]
+      }
+    },
+    "/orgs": {
+      "post": {
+        "operationId": "src.handlers.org.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrgDefinition" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/admin"] }],
+        "summary": "Create an organization",
+        "tags": ["Organizations"]
+      }
+    },
+    "/repos": {
+      "get": {
+        "description": "Get a list of repositories accessibly by the authenticated user",
+        "operationId": "src.handlers.repo.list_all",
+        "parameters": [
+          {
+            "description": "If specified, filters repositories by ownership of the authenticated user. True would mean only repos they own will be returned. False would mean only repos they collaborate on will be returned.\n",
+            "in": "query",
+            "name": "owned",
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/RepoList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "List user's repositories",
+        "tags": ["Repository Management"]
+      },
+      "post": {
+        "description": "Create an empty repo",
+        "operationId": "src.handlers.repo.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  { "$ref": "#/components/schemas/NewRepo" },
+                  {
+                    "properties": { "branchless": { "type": "boolean" } },
+                    "type": "object"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Repo" }
+              }
+            },
+            "description": "The newly created repo object"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Create a repo",
+        "tags": ["Repository Management"]
+      }
+    },
+    "/repos/{repo_id}": {
+      "delete": {
+        "description": "Delete a repo. All files, workspaces, commits, branches permissions etc. associated with the repo will be deleted.",
+        "operationId": "src.handlers.repo.delete",
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Delete a repo.",
+        "tags": ["Repository Manipulation"]
+      },
+      "get": {
+        "description": "Get details of an existing repo.",
+        "operationId": "src.handlers.repo.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Repo" }
+              }
+            },
+            "description": "Repo object with the requested identifier"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get details of an existing repo.",
+        "tags": ["Repository Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }]
+    },
+    "/repos/{repo_id}/blobs/entry/{ref_id}/{path}": {
+      "get": {
+        "operationId": "src.handlers.files.get_file_entry",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/RefParam" },
+          { "$ref": "#/components/parameters/PathParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileEntry" }
+              }
+            },
+            "description": "File metadata"
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get file entry. Either one of workspace, branch or commit ID needs to be specified. This api supports providing download url for large files.\n",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/blobs/{blob_id}": {
+      "get": {
+        "operationId": "src.handlers.files.get_blob_by_version",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/BlobParam" },
+          { "$ref": "#/components/parameters/VersionQueryParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/octet-stream": {
+                "schema": { "format": "binary", "type": "string" }
+              }
+            },
+            "description": "File contents"
+          },
+          "204": { "$ref": "#/components/responses/CustomRedirect" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get file snapshot by blob version. The blob doesn't need to be connected to any ref (commit).",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/blobs/{ref_id}/{path}": {
+      "get": {
+        "operationId": "src.handlers.files.get_file",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/RefParam" },
+          { "$ref": "#/components/parameters/PathParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/octet-stream": {
+                "schema": { "format": "binary", "type": "string" }
+              }
+            },
+            "description": "File contents"
+          },
+          "204": { "$ref": "#/components/responses/CustomRedirect" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get file snapshot. Either one of workspace, branch or commit ID needs to be specified.",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/blobs/{workspace_id}/{path}": {
+      "delete": {
+        "operationId": "src.handlers.files.delete_file",
+        "parameters": [
+          {
+            "description": "The workspace's expected revision",
+            "in": "query",
+            "name": "base_revision",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          { "$ref": "#/components/parameters/TransactionIDParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JournalEntry" }
+              }
+            },
+            "description": "File deleted"
+          },
+          "412": { "description": "Bad revision, please update first" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Delete a file from an existing path",
+        "tags": ["File Mutation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" },
+        { "$ref": "#/components/parameters/PathParam" }
+      ],
+      "patch": {
+        "operationId": "src.handlers.files.move_file",
+        "parameters": [
+          {
+            "description": "The new path to where the file has moved",
+            "in": "query",
+            "name": "new_path",
+            "required": true,
+            "schema": {
+              "example": "/path/to/file",
+              "format": "path",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The workspace's expected revision",
+            "in": "query",
+            "name": "base_revision",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          { "$ref": "#/components/parameters/TransactionIDParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JournalEntry" }
+              }
+            },
+            "description": "File moved"
+          },
+          "412": { "description": "Bad revision, please update first" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Move a file to a different path.",
+        "tags": ["File Mutation"]
+      },
+      "post": {
+        "operationId": "src.handlers.files.create_or_update_file",
+        "parameters": [
+          {
+            "description": "The workspace's expected revision",
+            "in": "query",
+            "name": "base_revision",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          { "$ref": "#/components/parameters/AsyncFlowParam" },
+          { "$ref": "#/components/parameters/TransactionIDParam" },
+          { "in": "query", "name": "blob_id", "schema": { "type": "string" } },
+          {
+            "example": "dv.blob.40630485-8f8f-4c34-b102-0072ca53ffba",
+            "in": "query",
+            "name": "blob_version",
+            "schema": { "type": "string" }
+          },
+          { "$ref": "#/components/parameters/SHA1Param" },
+          { "$ref": "#/components/parameters/ModeParam" },
+          { "$ref": "#/components/parameters/MtimeParam" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": { "format": "binary", "type": "string" }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JournalEntry" }
+              }
+            },
+            "description": "File updated"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JournalEntry" }
+              }
+            },
+            "description": "File created"
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlobUploadUrl" }
+              }
+            },
+            "description": "Presigned URL is returned"
+          },
+          "400": { "description": "Path should be normalized" },
+          "412": { "description": "Bad revision, please update first" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Upload file to a new or existing path",
+        "tags": ["File Mutation"]
+      }
+    },
+    "/repos/{repo_id}/branches": {
+      "get": {
+        "description": "Get a list of all branches in the repo.",
+        "operationId": "src.handlers.refs.branch.list_all",
+        "responses": {
+          "200": { "$ref": "#/components/responses/BranchList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Repository Branch Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "Create a branch",
+        "operationId": "src.handlers.refs.branch.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NewBranch" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "tags": ["Repository Branch Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/branches/{branch_id}": {
+      "delete": {
+        "description": "Delete a branch",
+        "operationId": "src.handlers.refs.branch.delete",
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "tags": ["Repository Branch Manipulation"]
+      },
+      "get": {
+        "operationId": "src.handlers.refs.branch.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Branch" }
+              }
+            },
+            "description": "Branch details returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get the current branch details",
+        "tags": ["Repository Branch Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/BranchParam" }
+      ],
+      "put": {
+        "operationId": "src.handlers.refs.branch.put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommitId" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Update a branch",
+        "tags": ["Repository Branch Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/collaborators": {
+      "get": {
+        "description": "Get all collaborators and pending invites for repo",
+        "operationId": "src.handlers.collaboration.list_collaborators",
+        "responses": {
+          "200": { "$ref": "#/components/responses/CollaboratorsList" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "tags": ["Collaborators"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }]
+    },
+    "/repos/{repo_id}/collaborators/{user_id}": {
+      "delete": {
+        "description": "Revoke a user's access level to the repo",
+        "operationId": "src.handlers.collaboration.revoke_access",
+        "responses": { "200": { "$ref": "#/components/responses/OKEmpty" } },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Collaborators"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/UserIdParam" }
+      ],
+      "patch": {
+        "description": "Change a user's access level to the repo",
+        "operationId": "src.handlers.collaboration.update_mode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CollaborationRequest" }
+            }
+          }
+        },
+        "responses": { "200": { "$ref": "#/components/responses/OKEmpty" } },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Collaborators"]
+      }
+    },
+    "/repos/{repo_id}/commits": {
+      "get": {
+        "description": "Get a list of commits",
+        "operationId": "src.handlers.commit.list_all",
+        "parameters": [
+          {
+            "description": "If specified, filters commit list to start with specified ref IDs (branches, workspaces etc.), otherwise return commits accessible from all branches.\n",
+            "in": "query",
+            "name": "ref_ids",
+            "schema": { "items": { "type": "string" }, "type": "array" }
+          },
+          { "$ref": "#/components/parameters/PageLimit" },
+          { "$ref": "#/components/parameters/PageSkip" },
+          { "$ref": "#/components/parameters/PageQuery" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/CommitList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Repository Commit Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "Create a commit",
+        "operationId": "src.handlers.commit.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommitRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "tags": ["Repository Commit Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/commits/bulk": {
+      "get": {
+        "description": "Get bulk details of commits by their IDs",
+        "operationId": "src.handlers.commit.get_bulk",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          {
+            "description": "List of commit IDs to include\n",
+            "in": "query",
+            "name": "commit_ids",
+            "required": true,
+            "schema": {
+              "items": {
+                "description": "A commit ID",
+                "example": "dv.commit.350e1bc3-52dc-4659-9817-7ce8f3fdf628",
+                "maxLength": 128,
+                "minLength": 3,
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/CommitsById" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "tags": ["Repository Commit Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/commits/{commit_id}": {
+      "get": {
+        "description": "Get details of a specific commit",
+        "operationId": "src.handlers.commit.get",
+        "responses": {
+          "200": { "$ref": "#/components/responses/Commit" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "tags": ["Repository Commit Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/CommitParam" }
+      ]
+    },
+    "/repos/{repo_id}/compare": {
+      "get": {
+        "operationId": "src.handlers.filetree.compare_refs",
+        "parameters": [
+          {
+            "description": "A tree_id, workspace_id, branch_id, commit_id or tag_id. If omitted, assuming the empty tree.",
+            "in": "query",
+            "name": "base_id",
+            "schema": { "default": "", "maxLength": 128, "type": "string" }
+          },
+          { "$ref": "#/components/parameters/OtherRefParam" },
+          { "$ref": "#/components/parameters/BaseVersionParam" },
+          { "$ref": "#/components/parameters/OtherVersionParam" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/ComparisonList" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "summary": "Compare two refs (commit/branch/workspace/tag/tree) in this repo",
+        "tags": ["Repository Content Comparison"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }]
+    },
+    "/repos/{repo_id}/debug/tree/{tree_id}": {
+      "get": {
+        "operationId": "src.handlers.debug.get_tree",
+        "responses": { "200": { "$ref": "#/components/responses/Tree" } },
+        "security": [{ "OAuth2": ["coreapi/admin"] }],
+        "summary": "Get a specific tree's content",
+        "tags": ["Debug"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/TreeIdParam" },
+        { "$ref": "#/components/parameters/VersionQueryParam" }
+      ]
+    },
+    "/repos/{repo_id}/debug/{ref_id}/path_sequence/{path}": {
+      "get": {
+        "operationId": "src.handlers.debug.get_sequence_to_path",
+        "responses": { "200": { "$ref": "#/components/responses/Trees" } },
+        "security": [{ "OAuth2": ["coreapi/admin"] }],
+        "summary": "Get the trees sequence on the path from the root to the path's leaf",
+        "tags": ["Debug"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/RefParam" },
+        { "$ref": "#/components/parameters/PathParam" }
+      ]
+    },
+    "/repos/{repo_id}/debug/{ref_id}/root_tree": {
+      "get": {
+        "operationId": "src.handlers.debug.get_root_tree",
+        "responses": { "200": { "$ref": "#/components/responses/Tree" } },
+        "security": [{ "OAuth2": ["coreapi/admin"] }],
+        "summary": "Get the root tree of ref",
+        "tags": ["Debug"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/RefParam" }
+      ]
+    },
+    "/repos/{repo_id}/import": {
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "Import a Git repo with all history from a Git URL. {repo_id} must have no commits and no branches, or be already marked as synced with the same git_url.",
+        "operationId": "src.handlers.git_import.import_in_background",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "git_url": {
+                        "description": "URL to the git repo. May be omitted if repo_id already has it set.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {}
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Import started asynchronously. Poll the repo until it shows a default branch."
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Import a Git repo into this Diversion repo",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/invites/{collaborator_handle}": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/CollaboratorParam" }
+      ],
+      "put": {
+        "description": "Invite a collaborator to a repository",
+        "operationId": "src.handlers.invites.create_new",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CollaborationRequest" }
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Collaborators"]
+      }
+    },
+    "/repos/{repo_id}/invites/{invite_id}": {
+      "delete": {
+        "description": "Revoke existing invite",
+        "operationId": "src.handlers.invites.revoke",
+        "responses": {
+          "200": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Collaborators"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/InviteIdParam" }
+      ],
+      "post": {
+        "description": "Resend existing invite",
+        "operationId": "src.handlers.invites.resend",
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Collaborators"]
+      }
+    },
+    "/repos/{repo_id}/items/history/{item_id}": {
+      "get": {
+        "operationId": "src.handlers.commit.get_item_history",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/ItemIdParam" },
+          { "$ref": "#/components/parameters/PageLimit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/ItemHistoryResponse" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get item history by its ID (either blob ID or tree ID)",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/items/metadata/{item_id}/{version}": {
+      "get": {
+        "operationId": "src.handlers.files.get_item_metadata_by_id_ver",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/ItemIdParam" },
+          { "$ref": "#/components/parameters/VersionPathParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileMetadata" }
+              }
+            },
+            "description": "File metadata"
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get item metadata by id and version. The item doesn't need to be connected to any ref (commit).",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/merges": {
+      "get": {
+        "operationId": "src.handlers.merges.discovery.get_all",
+        "parameters": [
+          { "$ref": "#/components/parameters/BaseRefParam" },
+          { "$ref": "#/components/parameters/OtherRefParam" },
+          {
+            "description": "If specified, filters merges by resolve status",
+            "in": "query",
+            "name": "is_resolved",
+            "schema": { "example": true, "type": "boolean" }
+          },
+          {
+            "description": "If specified, filters merges by open status",
+            "in": "query",
+            "name": "is_open",
+            "schema": { "example": true, "type": "boolean" }
+          }
+        ],
+        "responses": { "200": { "$ref": "#/components/responses/MergeList" } },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Retrieve conflicted merges in this repo",
+        "tags": ["Repository Merge Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "operationId": "src.handlers.merge.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/BaseRefParam",
+            "description": "A branch or workspace ID",
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/OtherRefParam",
+            "description": "A commit or branch ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NewResourceId" }
+              }
+            },
+            "description": "The merge into a branch was completed successfully, and the response contains the new commit ID"
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MergeId" }
+              }
+            },
+            "description": "The merge is in progress. It has merge conflicts requiring active input from the user for conflict resolution. The response contains a merge ID, which can be used for querying /repos/{repo_id}/merges/{merge_id}"
+          },
+          "204": {
+            "$ref": "#/components/responses/OKEmpty",
+            "description": "The merge into a workspace was completed successfully"
+          }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Merge into branch or workspace",
+        "tags": ["Repository Merge Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/merges/{merge_id}": {
+      "get": {
+        "operationId": "src.handlers.merges.discovery.get",
+        "responses": {
+          "200": { "$ref": "#/components/responses/DetailedMerge" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Details of a specific merge in progress",
+        "tags": ["Repository Merge Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/MergeParam" }
+      ],
+      "post": {
+        "operationId": "src.handlers.merges.finalize.finalize",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommitMessage" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "403": { "$ref": "#/components/responses/Unauthorized" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "405": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "After all conflicts are resolved, finalizes the merge with a commit",
+        "tags": ["Repository Merge Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/merges/{merge_id}/close": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/MergeParam" }
+      ],
+      "post": {
+        "operationId": "src.handlers.merges.finalize.close_merge",
+        "responses": {
+          "200": { "$ref": "#/components/responses/OKEmpty" },
+          "403": { "$ref": "#/components/responses/Unauthorized" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Close an open merge without resolving it",
+        "tags": ["Repository Merge Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/merges/{merge_id}/conflicts/accept/{index_id}": {
+      "post": {
+        "operationId": "src.handlers.merges.accept.accept_side",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/MergeParam" },
+          { "$ref": "#/components/parameters/ConflictIndexIdParam" }
+        ],
+        "responses": { "200": { "$ref": "#/components/responses/OKEmpty" } },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Accepts a change from one of the branches (base or other)",
+        "tags": ["Repository Merge Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/merges/{merge_id}/conflicts/{conflict_id}": {
+      "post": {
+        "operationId": "src.handlers.merges.blobs.update_file",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/MergeParam" },
+          { "$ref": "#/components/parameters/ConflictIdParam" },
+          { "$ref": "#/components/parameters/AsyncFlowParam" },
+          {
+            "$ref": "#/components/parameters/SHA1Param",
+            "description": "sha of the contents, to be used in case of async flow"
+          },
+          {
+            "$ref": "#/components/parameters/ModeParam",
+            "description": "Updates the file or tree mode with the given value. Can be used to resolve mode conflicts."
+          },
+          {
+            "description": "Does this update resolve the conflict to the file, or only stores temporary changes?",
+            "in": "query",
+            "name": "resolve",
+            "schema": { "default": false, "type": "boolean" }
+          },
+          {
+            "description": "Updates the path of the file with the value passed here. Can be used to resolve path conflicts.",
+            "in": "query",
+            "name": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": { "format": "binary", "type": "string" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/IdVersion" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Update a conflicting file, potentially resolving the conflict.",
+        "tags": ["Repository Merge Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/revert": {
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "The operation reverts any changes done in the single commit represented by revert_ref_id (compared to its own parent). These opposing changes are then applied into the branch represented by base_id. If any changes were done between revert_ref_id and base_id, they will be checked for conflicts with the revert changes.\n",
+        "operationId": "src.handlers.merge.revert",
+        "parameters": [
+          { "$ref": "#/components/parameters/BaseRefParam", "required": true },
+          { "$ref": "#/components/parameters/RevertRefParam", "required": true }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NewResourceId" }
+              }
+            },
+            "description": "The revert was completed successfully, and the response contains the new commit ID"
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MergeId" }
+              }
+            },
+            "description": "The revert is in progress. It has merge conflicts requiring active input from the user for conflict resolution. The response contains a merge ID, which can be used for querying /repos/{repo_id}/merges/{merge_id}"
+          }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Revert commit",
+        "tags": ["Repository Commit Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/shelves": {
+      "get": {
+        "operationId": "src.handlers.shelf.list_all",
+        "responses": {
+          "200": { "$ref": "#/components/responses/ShelfList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get a list of all shelves in the repo.",
+        "tags": ["Repository Shelves Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        {
+          "description": "Optional branch id to filter by",
+          "in": "query",
+          "name": "branch_id",
+          "required": false,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "operationId": "src.handlers.shelf.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateShelf" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Shelf" }
+              }
+            },
+            "description": "Shelf details returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Create a shelf",
+        "tags": ["Repository Shelves Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/shelves/{shelf_id}": {
+      "delete": {
+        "operationId": "src.handlers.shelf.delete",
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Delete a shelf",
+        "tags": ["Repository Shelves Manipulation"]
+      },
+      "get": {
+        "operationId": "src.handlers.shelf.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Shelf" }
+              }
+            },
+            "description": "Shelf details returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get shelf details",
+        "tags": ["Repository Shelves Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/ShelfIdParam" }
+      ]
+    },
+    "/repos/{repo_id}/shelves/{shelf_id}/apply": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/ShelfIdParam" }
+      ],
+      "post": {
+        "operationId": "src.handlers.shelf.apply",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ApplyShelf" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MergeId" }
+              }
+            },
+            "description": "The merge is in progress. It has merge conflicts requiring active input from the user for conflict resolution. The response contains a merge ID, which can be used for querying /repos/{repo_id}/merges/{merge_id}"
+          },
+          "204": {
+            "$ref": "#/components/responses/OKEmpty",
+            "description": "The merge into a workspace was completed successfully"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Apply a shelf onto a workspace",
+        "tags": ["Repository Shelves Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/sync": {
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "Sync all history from Git. The repo must already be associated with a Git repo (see import).",
+        "operationId": "src.handlers.git_import.sync_in_background",
+        "responses": {
+          "202": { "description": "Sync started asynchronously." },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "summary": "Sync a Git repo to this Diversion repo",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/tags": {
+      "get": {
+        "operationId": "src.handlers.refs.tag.list_all",
+        "responses": {
+          "200": { "$ref": "#/components/responses/TagList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get a list of all tags in the repo.",
+        "tags": ["Repository Tag Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "operationId": "src.handlers.refs.tag.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateTag" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Create a tag",
+        "tags": ["Repository Tag Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/tags/{tag_id}": {
+      "delete": {
+        "operationId": "src.handlers.refs.tag.delete",
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Delete a tag",
+        "tags": ["Repository Tag Manipulation"]
+      },
+      "get": {
+        "operationId": "src.handlers.refs.tag.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Tag" }
+              }
+            },
+            "description": "Tag details returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get tag details",
+        "tags": ["Repository Tag Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/TagParam" }
+      ],
+      "patch": {
+        "operationId": "src.handlers.refs.tag.patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ModifyTag" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Update a tag",
+        "tags": ["Repository Tag Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/trees/{ref_id}": {
+      "get": {
+        "operationId": "src.handlers.filetree.filetree",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/RefParam" },
+          { "$ref": "#/components/parameters/FileWalkRecurseParam" },
+          { "$ref": "#/components/parameters/FileEntriesLimit" },
+          { "$ref": "#/components/parameters/DirOffsetItemName" },
+          { "$ref": "#/components/parameters/IncludeDeletedItemsParam" },
+          { "$ref": "#/components/parameters/TreeIdQueryParam" },
+          { "$ref": "#/components/parameters/TreeVersionQueryParam" },
+          { "$ref": "#/components/parameters/TreeItemNameQueryParam" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/FileEntryList" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "412": { "$ref": "#/components/responses/PreconditionFailed" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get file tree snapshot. Either one of workspace, branch or commit ID needs to be specified as ref ID.",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/trees/{ref_id}/{path}": {
+      "get": {
+        "operationId": "src.handlers.filetree.filetree_under_path",
+        "parameters": [
+          { "$ref": "#/components/parameters/RepoParam" },
+          { "$ref": "#/components/parameters/RefParam" },
+          { "$ref": "#/components/parameters/PathParam" },
+          { "$ref": "#/components/parameters/FileWalkRecurseParam" },
+          { "$ref": "#/components/parameters/FileEntriesLimit" },
+          { "$ref": "#/components/parameters/DirOffsetItemName" },
+          { "$ref": "#/components/parameters/IncludeDeletedItemsParam" },
+          { "$ref": "#/components/parameters/TreeIdQueryParam" },
+          { "$ref": "#/components/parameters/TreeVersionQueryParam" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/FileEntryList" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "410": { "$ref": "#/components/responses/PreconditionFailed" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get file tree snapshot for a nested tree path. Either one of workspace, branch or commit ID needs to be specified as ref ID.",
+        "tags": ["Repository Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces": {
+      "get": {
+        "description": "List user's workspaces",
+        "operationId": "src.handlers.workspace.list_all",
+        "responses": {
+          "200": { "$ref": "#/components/responses/WorkspaceList" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [{ "$ref": "#/components/parameters/RepoParam" }],
+      "post": {
+        "description": "Create a new workspace",
+        "operationId": "src.handlers.workspace.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NewWorkspace" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Created" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Create a workspace",
+        "tags": ["Repository Workspace Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}": {
+      "get": {
+        "description": "Get a workspace object details",
+        "operationId": "src.handlers.workspace.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Workspace" }
+              }
+            },
+            "description": "Workspace details returned"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ],
+      "patch": {
+        "description": "Set the workspace to follow a new branch or commit (checkout), and optionally change its name. Currently supports only moving to a branch with an identical commit as the workspace's current branch, or moving to any branch/commit if the workspace has no working changes.",
+        "operationId": "src.handlers.workspace.patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkspaceModify" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/OKEmpty" },
+          "409": { "$ref": "#/components/responses/FailedDueToPendingChanges" },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Update a workspace",
+        "tags": ["Repository Workspace Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/changes-since": {
+      "get": {
+        "operationId": "src.handlers.workspace.compare_ref_to_workspace",
+        "parameters": [
+          {
+            "description": "A tree_id, workspace_id, branch_id, commit_id or tag_id. If omitted, assuming the empty tree.",
+            "in": "query",
+            "name": "base_id",
+            "schema": { "maxLength": 128, "type": "string" }
+          },
+          { "$ref": "#/components/parameters/BaseVersionParam" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/ComparisonList" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "summary": "Compare a ref (commit/branch/workspace/tag/tree) to this workspace",
+        "tags": ["Repository Content Comparison"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ]
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/files": {
+      "get": {
+        "operationId": "src.handlers.files.get",
+        "parameters": [
+          {
+            "description": "If true, forces the creation of a new archive",
+            "in": "query",
+            "name": "force",
+            "schema": { "default": false, "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/x-tar": {
+                "schema": { "format": "binary", "type": "string" }
+              }
+            },
+            "description": "Files retrieved successfully"
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AsyncResponse" }
+              }
+            },
+            "description": "Processing started, and the result will be available at the returned URL"
+          },
+          "default": { "$ref": "#/components/schemas/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get all files from a workspace in tar format",
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ],
+      "post": {
+        "operationId": "src.handlers.files.post",
+        "requestBody": {
+          "content": {
+            "application/x-tar": {
+              "schema": { "format": "binary", "type": "string" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "201": { "description": "Files written" } },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Upload bulk of files to the repo in tar format",
+        "tags": ["Repository Workspace Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/preferences": {
+      "get": {
+        "operationId": "src.handlers.workspace.get_preferences",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspacePreferences"
+                }
+              }
+            },
+            "description": "Preferences of the workspace for the user"
+          },
+          "default": { "$ref": "#/components/schemas/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "summary": "Get preferences of the current user",
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ],
+      "put": {
+        "operationId": "src.handlers.workspace.set_preferences",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkspacePreferences" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": { "$ref": "#/components/responses/OKEmpty" },
+          "default": { "$ref": "#/components/schemas/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Update the preferences of the current user",
+        "tags": ["Repository Workspace Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/reset": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ],
+      "post": {
+        "operationId": "src.handlers.workspace.reset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "all": { "type": "boolean" },
+                  "paths": {
+                    "items": { "minLength": 1, "type": "string" },
+                    "minItems": 1,
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ResetStatus" }
+              }
+            },
+            "description": "The updated status of the workspace"
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [{ "OAuth2": ["coreapi/write"] }],
+        "summary": "Reset changes in workspace",
+        "tags": ["Repository Workspace Manipulation"]
+      }
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/status": {
+      "get": {
+        "operationId": "src.handlers.workspace.get_status",
+        "parameters": [
+          { "$ref": "#/components/parameters/DetailWorkspaceStatusItems" },
+          { "$ref": "#/components/parameters/FileEntriesLimit" },
+          { "$ref": "#/components/parameters/FileWalkRecurseParam" },
+          { "$ref": "#/components/parameters/PathPrefixParam" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkspaceStatus" }
+              }
+            },
+            "description": "The changes made to this workspace since the commit it's based upon."
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get status of changes in workspace",
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ]
+    },
+    "/repos/{repo_id}/workspaces/{workspace_id}/updates": {
+      "get": {
+        "operationId": "src.handlers.workspace.get_updates",
+        "parameters": [
+          {
+            "description": "If provided, returns all change history above this revision. Pass `0` to get all changes.",
+            "in": "query",
+            "name": "base_revision",
+            "required": false,
+            "schema": { "type": "integer" }
+          },
+          {
+            "description": "If provided, returns all change history above this ordinal ID. It can be used for paging updates of same revision.",
+            "in": "query",
+            "name": "from_ordinal_id",
+            "required": false,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkspaceUpdates" }
+              }
+            },
+            "description": "The changes made to this workspace since the commit it's based upon."
+          },
+          "default": { "$ref": "#/components/responses/Error" }
+        },
+        "security": [
+          { "OAuth2": ["coreapi/read"] },
+          { "OAuth2": ["coreapi/write"] }
+        ],
+        "summary": "Get status of changes in workspace",
+        "tags": ["Repository Workspace Manipulation"]
+      },
+      "parameters": [
+        { "$ref": "#/components/parameters/RepoParam" },
+        { "$ref": "#/components/parameters/WorkspaceParam" }
+      ]
+    },
+    "/support/bundle/upload": {
+      "get": {
+        "operationId": "src.handlers.support.get_support_bundle_upload_link",
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlobUploadUrl" }
+              }
+            },
+            "description": "Presigned URL is returned"
+          }
+        },
+        "security": [{ "OAuth2": ["coreapi/read"] }],
+        "summary": "Get a presigned url that will be used to upload a support bundle",
+        "tags": ["Support"]
+      }
+    }
+  },
+  "servers": [{ "url": "/v0" }]
+}

@@ -23,11 +23,6 @@
   ],
   "anchors": [
     {
-      "name": "API Reference",
-      "icon": "square-terminal",
-      "url": "api-reference"
-    },
-    {
       "name": "Blog",
       "icon": "Newspaper",
       "url": "https://www.diversion.dev/blog"
@@ -36,7 +31,162 @@
   "navigation": [
     {
       "group": "Analytics",
-      "pages": ["api-reference/analytics-ingest"]
+      "pages": ["api-reference/analytics/Ingest-analytics-events"]
+    },
+    {
+      "group": "Authentication",
+      "pages": [
+        "api-reference/authentication/get-auth-complete",
+        "api-reference/authentication/get-auth-fetch_code",
+        "api-reference/authentication/get-auth-poll",
+        "api-reference/authentication/test-token-validity,-repo-write-access"
+      ]
+    },
+    {
+      "group": "Collaborators",
+      "pages": [
+        "api-reference/collaborators/delete-repos-collaborators",
+        "api-reference/collaborators/delete-repos-invites",
+        "api-reference/collaborators/get-repos-collaborators",
+        "api-reference/collaborators/patch-repos-collaborators",
+        "api-reference/collaborators/post-repos-invites",
+        "api-reference/collaborators/put-repos-invites"
+      ]
+    },
+    {
+      "group": "Debug",
+      "pages": [
+        "api-reference/debug/check-server-is-alive",
+        "api-reference/debug/get-a-specific-tree's-content",
+        "api-reference/debug/get-the-root-tree-of-ref",
+        "api-reference/debug/get-the-trees-sequence-on-the-path-from-the-root-to-the-path's-leaf"
+      ]
+    },
+    {
+      "group": "File Mutation",
+      "pages": [
+        "api-reference/file-mutation/delete-a-file-from-an-existing-path",
+        "api-reference/file-mutation/move-a-file-to-a-different-path.",
+        "api-reference/file-mutation/upload-file-to-a-new-or-existing-path"
+      ]
+    },
+    {
+      "group": "Organizations",
+      "pages": ["api-reference/organizations/create-an-organization"]
+    },
+    {
+      "group": "Repository Branch Manipulation",
+      "pages": [
+        "api-reference/repository-branch-manipulation/get-the-current-branch-details",
+        "api-reference/repository-branch-manipulation/delete-repos-branches",
+        "api-reference/repository-branch-manipulation/get-repos-branches",
+        "api-reference/repository-branch-manipulation/post-repos-branches",
+        "api-reference/repository-branch-manipulation/update-a-branch"
+      ]
+    },
+    {
+      "group": "Repository Commit Manipulation",
+      "pages": [
+        "api-reference/repository-commit-manipulation/get-repos-commits-bulk",
+        "api-reference/repository-commit-manipulation/get-repos-commits",
+        "api-reference/repository-commit-manipulation/get-repos-specific-commits",
+        "api-reference/repository-commit-manipulation/post-repos-commits",
+        "api-reference/repository-commit-manipulation/revert-commit"
+      ]
+    },
+    {
+      "group": "Repository Content Comparison",
+      "pages": [
+        {
+          "group": "Compare A Ref Commit",
+          "pages": [
+            "api-reference/repository-content-comparison/compare-a-ref-commit/branch/workspace/tag/tree-to-this-workspace"
+          ]
+        },
+        {
+          "group": "Compare Two Refs Commit",
+          "pages": [
+            "api-reference/repository-content-comparison/compare-two-refs-commit/branch/workspace/tag/tree-in-this-repo"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Repository Management",
+      "pages": [
+        "api-reference/repository-management/create-a-repo",
+        "api-reference/repository-management/list-user's-repositories"
+      ]
+    },
+    {
+      "group": "Repository Manipulation",
+      "pages": [
+        "api-reference/repository-manipulation/delete-a-repo",
+        "api-reference/repository-manipulation/get-details-of-an-existing-repo",
+        "api-reference/repository-manipulation/get-file-entry",
+        "api-reference/repository-manipulation/get-file-snapshot-by-blob-version",
+        "api-reference/repository-manipulation/get-file-snapshot",
+        "api-reference/repository-manipulation/get-file-tree-snapshot-either-one-of-workspace",
+        "api-reference/repository-manipulation/get-file-tree-snapshot-for-a-nested-tree-path",
+        "api-reference/repository-manipulation/get-item-history-by-its-ID",
+        "api-reference/repository-manipulation/get-item-metadata-by-id-and-version",
+        "api-reference/repository-manipulation/import-a-git-repo-into-this-diversion-repo",
+        "api-reference/repository-manipulation/sync-a-git-repo-to-this-diversion-repo"
+      ]
+    },
+    {
+      "group": "Repository Merge Manipulation",
+      "pages": [
+        "api-reference/repository-merge-manipulation/accepts-a-change-from-one-of-the-branches",
+        "api-reference/repository-merge-manipulation/after-all-conflicts-are-resolved",
+        "api-reference/repository-merge-manipulation/close-an-open-merge-without-resolving-it",
+        "api-reference/repository-merge-manipulation/details-of-a-specific-merge-in-progress",
+        "api-reference/repository-merge-manipulation/merge-into-branch-or-workspace",
+        "api-reference/repository-merge-manipulation/retrieve-conflicted-merges-in-this-repo",
+        "api-reference/repository-merge-manipulation/update-a-conflicting-file,-potentially-resolving-the-conflict"
+      ]
+    },
+    {
+      "group": "Repository Shelves Manipulation",
+      "pages": [
+        "api-reference/repository-shelves-manipulation/apply-a-shelf-onto-a-workspace",
+        "api-reference/repository-shelves-manipulation/create-a-shelf",
+        "api-reference/repository-shelves-manipulation/delete-a-shelf",
+        "api-reference/repository-shelves-manipulation/get-a-list-of-all-shelves-in-the-repo.",
+        "api-reference/repository-shelves-manipulation/get-shelf-details"
+      ]
+    },
+    {
+      "group": "Repository Tag Manipulation",
+      "pages": [
+        "api-reference/repository-tag-manipulation/create-a-tag",
+        "api-reference/repository-tag-manipulation/delete-a-tag",
+        "api-reference/repository-tag-manipulation/get-a-list-of-all-tags-in-the-repo.",
+        "api-reference/repository-tag-manipulation/get-tag-details",
+        "api-reference/repository-tag-manipulation/update-a-tag"
+      ]
+    },
+    {
+      "group": "Repository Workspace Manipulation",
+      "pages": [
+        "api-reference/repository-workspace-manipulation/create-a-workspace",
+        "api-reference/repository-workspace-manipulation/get-all-files-from-a-workspace-in-tar-format",
+        "api-reference/repository-workspace-manipulation/get-preferences-of-the-current-user",
+        "api-reference/repository-workspace-manipulation/get-repos-repo_id-workspaces",
+        "api-reference/repository-workspace-manipulation/get-repos-workspaces",
+        "api-reference/repository-workspace-manipulation/get-status-of-changes-in-workspace-1",
+        "api-reference/repository-workspace-manipulation/get-status-of-changes-in-workspace",
+        "api-reference/repository-workspace-manipulation/reset-changes-in-workspace",
+        "api-reference/repository-workspace-manipulation/update-a-workspace",
+        "api-reference/repository-workspace-manipulation/update-the-preferences-of-the-current-user",
+        "api-reference/repository-workspace-manipulation/upload-bulk-of-files-to-the-repo-in-tar-format"
+      ]
+    },
+    {
+      "group": "Support",
+      "pages": [
+        "api-reference/support/get-a-presigned-url-that-will-be-used-to-upload-a-support-bundle"
+      ]
     }
   ],
   "footerSocials": {

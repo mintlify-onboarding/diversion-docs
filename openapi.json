@@ -3160,7 +3160,7 @@
             },
             "description": "Processing started, and the result will be available at the returned URL"
           },
-          "default": { "$ref": "#/components/schemas/Error" }
+          "default": { "$ref": "#/components/responses/Error" }
         },
         "security": [
           { "OAuth2": ["coreapi/read"] },
@@ -3203,7 +3203,7 @@
             },
             "description": "Preferences of the workspace for the user"
           },
-          "default": { "$ref": "#/components/schemas/Error" }
+          "default": { "$ref": "#/components/responses/Error" }
         },
         "security": [{ "OAuth2": ["coreapi/read"] }],
         "summary": "Get preferences of the current user",
@@ -3225,7 +3225,7 @@
         },
         "responses": {
           "202": { "$ref": "#/components/responses/OKEmpty" },
-          "default": { "$ref": "#/components/schemas/Error" }
+          "default": { "$ref": "#/components/responses/Error" }
         },
         "security": [{ "OAuth2": ["coreapi/write"] }],
         "summary": "Update the preferences of the current user",

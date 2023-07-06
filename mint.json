@@ -97,18 +97,8 @@
     {
       "group": "Repository Content Comparison",
       "pages": [
-        {
-          "group": "Compare A Ref Commit",
-          "pages": [
-            "api-reference/repository-content-comparison/compare-a-ref-commit/branch/workspace/tag/tree-to-this-workspace"
-          ]
-        },
-        {
-          "group": "Compare Two Refs Commit",
-          "pages": [
-            "api-reference/repository-content-comparison/compare-two-refs-commit/branch/workspace/tag/tree-in-this-repo"
-          ]
-        }
+        "api-reference/repository-content-comparison/compare-a-ref-commit/branch/workspace/tag/tree-to-this-workspace",
+        "api-reference/repository-content-comparison/compare-two-refs-commit/branch/workspace/tag/tree-in-this-repo"
       ]
     },
     {

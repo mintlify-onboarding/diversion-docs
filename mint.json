@@ -5,6 +5,11 @@
     "light": "/logo/light.png",
     "dark": "/logo/dark.png"
   },
+  "api": {
+    "baseUrl": [
+      "https://api.diversion.dev/v0"
+    ]
+  },
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#477BFF",

@@ -6,9 +6,7 @@
     "dark": "/logo/dark.png"
   },
   "api": {
-    "baseUrl": [
-      "https://api.diversion.dev/v0"
-    ]
+    "baseUrl": ["https://api.diversion.dev/v0"]
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -96,7 +94,7 @@
         "api-reference/repository-commit-manipulation/get-repos-commits",
         "api-reference/repository-commit-manipulation/get-repos-specific-commits",
         "api-reference/repository-commit-manipulation/post-repos-commits",
-        "api-reference/repository-commit-manipulation/revert-commit"
+        "api-reference/repository-commit-manipulation/Revert-commit"
       ]
     },
     {
@@ -164,17 +162,17 @@
     {
       "group": "Repository Workspace Manipulation",
       "pages": [
-        "api-reference/repository-workspace-manipulation/create-a-workspace",
-        "api-reference/repository-workspace-manipulation/get-all-files-from-a-workspace-in-tar-format",
-        "api-reference/repository-workspace-manipulation/get-preferences-of-the-current-user",
+        "api-reference/repository-workspace-manipulation/Create-a-workspace",
+        "api-reference/repository-workspace-manipulation/Get-all-files-from-a-workspace-in-tar-format",
+        "api-reference/repository-workspace-manipulation/Get-preferences-of-the-current-user",
         "api-reference/repository-workspace-manipulation/get-repos-repo_id-workspaces",
         "api-reference/repository-workspace-manipulation/get-repos-workspaces",
-        "api-reference/repository-workspace-manipulation/get-status-of-changes-in-workspace-1",
-        "api-reference/repository-workspace-manipulation/get-status-of-changes-in-workspace",
-        "api-reference/repository-workspace-manipulation/reset-changes-in-workspace",
-        "api-reference/repository-workspace-manipulation/update-a-workspace",
-        "api-reference/repository-workspace-manipulation/update-the-preferences-of-the-current-user",
-        "api-reference/repository-workspace-manipulation/upload-bulk-of-files-to-the-repo-in-tar-format"
+        "api-reference/repository-workspace-manipulation/Get-status-of-changes-in-workspace-1",
+        "api-reference/repository-workspace-manipulation/Get-status-of-changes-in-workspace",
+        "api-reference/repository-workspace-manipulation/Reset-changes-in-workspace",
+        "api-reference/repository-workspace-manipulation/Update-a-workspace",
+        "api-reference/repository-workspace-manipulation/Update-the-preferences-of-the-current-user",
+        "api-reference/repository-workspace-manipulation/Upload-bulk-of-files-to-the-repo-in-tar-format"
       ]
     },
     {
